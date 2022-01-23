@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_clone/resources/auth_methods.dart';
+import 'package:insta_clone/resources/firestore_methods.dart';
+import 'package:insta_clone/screens/login_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
 import 'package:insta_clone/utils/utils.dart';
 import 'package:insta_clone/widgets/follow_button.dart';
@@ -16,11 +19,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   var userData = {};
-  var postLen = 0;
+  int postLen = 0;
   int followers = 0;
   int following = 0;
   bool isFollowing = false;
   bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -28,15 +32,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   getData() async {
-    try {
-      setState(() {
+
+     setState(() {
         isLoading = true;
       });
+
+
+    try {
+     
+
       var Usersnap = await FirebaseFirestore.instance
           .collection('user')
           .doc(widget.uid)
           .get();
 
+      // TODO : how to aacces post count of another person from firebase storage.
       var postSnap = await FirebaseFirestore.instance
           .collection('post')
           .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -104,9 +114,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             backgroundColor:
                                                 mobileBackgroundColor,
                                             borderColor: Colors.grey,
-                                            text: 'Edit profile',
+                                            text: 'Sign Out',
                                             textColor: primaryColor,
-                                            function: () {},
+                                            function: () async {
+                                              await AuthMethod().signOut();
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const LoginScreen(),
+                                                ),
+                                              );
+                                            },
                                           )
                                         : isFollowing
                                             ? FollowButton(
@@ -114,7 +133,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 borderColor: Colors.grey,
                                                 text: 'Unfollow',
                                                 textColor: Colors.black,
-                                                function: () {},
+                                                function: () async {
+                                                  await FirestoreMethods()
+                                                      .followUser(
+                                                          FirebaseAuth.instance
+                                                              .currentUser!.uid,
+                                                          userData['uid']);
+                                                  setState(() {
+                                                    isFollowing = false;
+                                                    followers--;
+                                                  });
+                                                },
                                               )
                                             : FollowButton(
                                                 backgroundColor:
@@ -122,7 +151,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 borderColor: Colors.tealAccent,
                                                 text: 'Follow',
                                                 textColor: Colors.white,
-                                                function: () {},
+                                                function: () async {
+                                                  await FirestoreMethods()
+                                                      .followUser(
+                                                          FirebaseAuth.instance
+                                                              .currentUser!.uid,
+                                                          userData['uid']);
+                                                  setState(() {
+                                                    isFollowing = true;
+                                                    followers++;
+                                                  });
+                                                },
                                               )
                                   ],
                                 )
@@ -177,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           return Container(
                             child: Image(
                               image: NetworkImage(snap['postUrl']),
-                             // fit: BoxFit.cover,
+                              // fit: BoxFit.cover,
                             ),
                           );
                         },

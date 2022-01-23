@@ -6,6 +6,7 @@ import 'package:insta_clone/responsive/responsive.dart';
 import 'package:insta_clone/responsive/web_screen_layout.dart';
 import 'package:insta_clone/screens/sign_up_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
+import 'package:insta_clone/utils/global_variables.dart';
 import 'package:insta_clone/utils/utils.dart';
 
 import '../widgets/text_fields_input.dart';
@@ -64,7 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: MediaQuery.of(context).size.width > webScreenSize
+              ? EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 3)
+              : const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

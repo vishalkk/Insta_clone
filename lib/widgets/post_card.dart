@@ -6,6 +6,7 @@ import 'package:insta_clone/providers/user_provider.dart';
 import 'package:insta_clone/resources/firestore_methods.dart';
 import 'package:insta_clone/screens/comment_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
+import 'package:insta_clone/utils/global_variables.dart';
 import 'package:insta_clone/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -48,8 +49,14 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final model.User user = Provider.of<UserProvider>(context).getUser;
+    final width = MediaQuery.of(context).size.width;
     return Container(
-      color: mobileBackgroundColor,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: width > webScreenSize ? secondaryColor : mobileBackgroundColor,
+        ),
+        color: mobileBackgroundColor,
+      ),
       padding: const EdgeInsets.symmetric(
         vertical: 10,
       ),
@@ -100,7 +107,7 @@ class _PostCardState extends State<PostCard> {
                                           onTap: () async {
                                             FirestoreMethods().deletePost(
                                                 widget.snap['postId']);
-                                            Navigator.of(context).pop(); 
+                                            Navigator.of(context).pop();
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.symmetric(
@@ -135,14 +142,11 @@ class _PostCardState extends State<PostCard> {
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: double.infinity,
                   child: Image.network(
-                    
                     widget.snap['postUrl'],
-                   // fit: BoxFit.cover,
-                    
+                    // fit: BoxFit.cover,
                   ),
                 ),
                 AnimatedOpacity(

@@ -76,7 +76,7 @@ class _CommentScreenState extends State<CommentScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 18.0,
                     right: 8.0,
                   ),
@@ -104,7 +104,7 @@ class _CommentScreenState extends State<CommentScreen> {
                 },
                 child: Container(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Text(
+                  child: const  Text(
                     'Post',
                     style: TextStyle(
                       color: Colors.tealAccent,

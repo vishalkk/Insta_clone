@@ -68,8 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ProfileScreen(
-                              uid: (snapshot.data! as dynamic).docs[index]
-                                  ['uid']),
+                              uid: (snapshot.data! as dynamic).docs[index]['uid'],),
                         ),
                       ),
                       child: ListTile(
@@ -88,7 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
               },
             )
           : FutureBuilder(
-              future: FirebaseFirestore.instance.collection('post').get(),
+              future: FirebaseFirestore.instance.collection('post').orderBy('datePublished').get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(

@@ -50,7 +50,7 @@ class AuthMethod {
           bio: bio,
           followers: [],
           following: [],
-          photoUrl: photoUrl,
+         photoUrl: photoUrl,
         );
         // add user info to database
         await _firestore.collection('user').doc(cred.user!.uid).set(
@@ -81,5 +81,9 @@ class AuthMethod {
       res = err.toString();
     }
     return res;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }
