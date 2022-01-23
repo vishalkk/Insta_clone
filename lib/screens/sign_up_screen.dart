@@ -34,7 +34,7 @@ class _LoginScreenState extends State<SignUpScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _usernameController.dispose();
-    _bioController.dispose();
+  //  _bioController.dispose();
   }
 
   void selectImage() async {
@@ -57,21 +57,24 @@ class _LoginScreenState extends State<SignUpScreen> {
       file: _image!,
     );
 
-    setState(() {
-      _isLoading = false;
-    });
-
-    if (res != 'success') {
-      showSnackBar(res, context);
-    } else {
+    if (res == 'success') {
+      setState(() {
+        _isLoading = false;
+      });
+      // nav to home
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-          mobileScreenLayout: MobileScreenLayout(),
-          webScreenLayout: WebScreenLayout(),
-           ),
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
           ),
-          );
+        ),
+      );
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      showSnackBar(res, context);
     }
   }
 
@@ -165,7 +168,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                 height: 64,
               ),
               InkWell(
-                onTap: ()  {
+                onTap: () {
                   signUpUser;
                   //       print(res);
                 },
@@ -189,7 +192,6 @@ class _LoginScreenState extends State<SignUpScreen> {
                     color: Colors.tealAccent,
                   ),
                 ),
-               
               ),
               const SizedBox(height: 12.0),
               Flexible(
@@ -200,7 +202,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("Don't have an account ?"),
+                    child: const Text("have an account ?"),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   const SizedBox(
