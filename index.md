@@ -1,37 +1,35 @@
-## Welcome to GitHub Pages
+A Instagram clone app made with flutter using Firebase
 
-You can use the [editor on GitHub](https://github.com/vishalkk/Insta_clone/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+The following flutter concepts are covered in app
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+1. State management using **provider**
+2. Working with **Firebase** authentication and storage
+3. Responsive layout
+4. Single code for website and Android app
 
-### Jekyll Themes
+`App description`
+- instagram clone web app and android app using firebase as backend
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vishalkk/Insta_clone/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+`Features`
+- login / signUp / signOut
+- post description
+- upload/ delete post
+- like/unlike post
+- follow/unfollow users
+- profile screen
+- staggered images view like instagram
+- search user
+- Carousel slider
+- Search Bar
+- Responsive UI
+- Commenting on post
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+[video](https://user-images.githubusercontent.com/36620044/152039100-a783e146-bab4-4f6d-8939-1a77202f91ba.mp4)
+
+
+
